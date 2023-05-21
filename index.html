@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .loadingpage{
+            width: 100%;
+            height: 100vh;
+        }
+        #canvas{
+            background: url(./images/loading_sprite.png) no-repeat;
+            background-position: 0px 0px;
+            width: 300px;
+            height: 350px;
+            margin: 150px auto 50px auto;
+            animation: mario .7s infinite alternate;
+            animation-timing-function: steps(1);
+        }
+        @keyframes mario{
+            from{ background-position: 0px 0px;width: 300px;height: 350px; }
+            30%{ background-position: -300px 0px;width: 300px;height: 350px; }		
+            65%{ background-position: -600px 0px;width: 300px;height: 350px; }
+            100%{ background-position: -900px 0px;width: 300px;height: 350px; }
+        }
+
+        #content.hidden {
+            display: none;
+        }
+        .loading {
+            width: 50%;
+            height: 15px;
+            margin: 50px auto;
+            background-color: #ccc;
+            border-radius: 50px;
+        }
+        .loading-bar {
+            height: 100%;
+            background-color: #0077ff;
+            width: 0%;
+            border-radius: 50px;
+            transition: width 1.0s ease-out;
+        }
+        #content{
+            width: 100%;
+            height: 100vh;
+            background-color: #0077ff;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="loadingpage">
+        <div id="canvas"></div>
+        <div class="loading">
+            <div class="loading-bar"></div>
+        </div>
+    </section>
+    <div id="content" class="hidden"></div>
+
+    <script>
+        const loadingBar = document.querySelector('.loading-bar');
+        const content = document.getElementById('content');
+
+        // Simulate a long load time
+        setTimeout(() => {
+            // Hide the loading bar
+            loadingBar.style.width = '100%';
+            // Show the main content
+            content.classList.remove('hidden');
+            // Wait for the animation to finish
+            setTimeout(() => {
+                // Remove the loading page from the DOM
+                document.body.removeChild(document.querySelector('.loadingpage'));
+            }, 1000);
+        }, 3000);
+    </script>
+</body>
+
+</html>
